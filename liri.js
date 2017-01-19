@@ -5,9 +5,7 @@ var Twitter = require('twitter');
 var spotify = require('spotify');
 var request = require('request');
 
-// Print data that is in the exports
 
-console.log(access.twitterKeys);
 
 // Takes in all of the command line arguments
 var inputString = process.argv;
@@ -58,6 +56,22 @@ else if (operand === "spotify-this-song") {
 
 else if (operand === "movie-this") {
 
+
+
+var queryUrl = "http://www.omdbapi.com/?t=" + data + "&y=&plot=short&r=json";
+
+
+
+request(queryUrl, function(error, response, body) {
+
+  // If the request is successful
+  if (!error && response.statusCode === 200) {
+
+    // Parse the body of the site and recover just the imdbRating
+    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+    console.log("Release Year: " + JSON.parse(body).Year);
+  }
+});
 
 
 
